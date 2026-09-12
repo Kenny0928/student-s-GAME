@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Space Shooter Arcade - 太空射擊遊戲大廳</title>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+  <div class="portal-container">
+    <!-- 頂部大廳標題 -->
+    <header class="portal-header">
+      <span class="portal-badge">⚡ HTML5 ARCADE LOBBY ⚡</span>
+      <h1 class="portal-title">SPACE SHOOTER</h1>
+      <p class="portal-subtitle">九年級資訊科技課程・太空射擊遊戲專案展示大廳</p>
+      
+      <div class="feature-pills">
+        <span class="pill">📱 手機觸控/虛擬按鍵適配</span>
+        <span class="pill">⌨️ 鍵盤 WASD / 方向鍵</span>
+        <span class="pill">🕹️ Arduino 實體搖桿 (Web Serial)</span>
+      </div>
+    </header>
+
+    <!-- 遊戲版本選擇卡片 -->
+    <main class="games-grid">
+      <!-- 經典版 -->
+      <a href="Original/index.html" class="game-card original">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">🚀</span>
+            <span class="tag cyan">經典教學版</span>
+          </div>
+          <h2 class="card-title">原始經典版</h2>
+          <p class="card-desc">
+            最基礎純粹的太空射擊體驗。適合用來理解遊戲主循環、物件導向飛船與子彈碰撞檢測機制。
+          </p>
+          <ul class="card-features">
+            <li><span>✦</span> 擊殺小怪：每隻 10 分</li>
+            <li><span>✦</span> 無限生存挑戰模式</li>
+            <li><span>✦</span> 適合入門修改飛行參數與生命數</li>
+          </ul>
+        </div>
+        <div class="btn-play">
+          進入經典版 <span>▶</span>
+        </div>
+      </a>
+
+      <!-- 學生挑戰版 -->
+      <a href="she_chan_ray/index.html" class="game-card boss">
+        <div>
+          <div class="card-top">
+            <span class="card-icon">👾</span>
+            <span class="tag magenta">Boss 戰挑戰版</span>
+          </div>
+          <h2 class="card-title">學生版 (she_chan_ray)</h2>
+          <p class="card-desc">
+            由學生客製化進階開發的關卡！擊敗 90 隻小怪後召喚巨型外星旗艦，進行高難度 Boss 決戰。
+          </p>
+          <ul class="card-features">
+            <li><span>✦</span> 小怪分數：每隻 1 分</li>
+            <li><span>✦</span> 達到 90 分：警告警報 + 巨型 Boss 現身</li>
+            <li><span>✦</span> Boss 規格：佔據 1/4 螢幕、50 滴血、雙砲散射彈幕</li>
+            <li><span>✦</span> 通關勝利結算畫面 (Mission Complete)</li>
+          </ul>
+        </div>
+        <div class="btn-play">
+          挑戰 Boss 版 <span>⚔️</span>
+        </div>
+      </a>
+    </main>
+
+    <!-- 底部操作提示 -->
+    <footer class="portal-footer">
+      <p><strong>💡 遊玩建議：</strong></p>
+      <p>・<strong>手機遊玩：</strong>支援在畫面滑動直接拖曳戰機，或點擊螢幕下方虛擬方向鍵與開火鍵。</p>
+      <p>・<strong>電腦遊玩：</strong>使用方向鍵或 <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移動，<kbd>SPACE</kbd> 發射子彈。</p>
+      <p>・<strong>實體搖桿：</strong>使用 Chrome 或 Edge 瀏覽器，可透過 USB 序列埠直接連線 Arduino 實體控制器。</p>
+    </footer>
+  </div>
+</body>
+</html>
+

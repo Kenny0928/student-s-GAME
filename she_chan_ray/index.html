@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Space Shooter - Boss 挑戰版 (she_chan_ray)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="arcade-container">
+    <!-- 頂部資訊列與導航 -->
+    <header class="arcade-header">
+      <div class="nav-left">
+        <a href="../index.html" class="btn-lobby" title="返回大廳">⬅ 大廳</a>
+        <div class="title-group">
+          <h1 class="arcade-title">SPACE SHOOTER</h1>
+          <span class="badge boss-badge">BOSS BATTLE</span>
+        </div>
+      </div>
+      <div class="controller-bar">
+        <button id="btnConnectSerial" class="btn-serial">
+          <span class="status-dot disconnected" id="serialDot"></span>
+          <span id="serialBtnText">連線 Arduino</span>
+        </button>
+        <button id="btnToggleSound" class="btn-sound" title="切換音效">🔊</button>
+      </div>
+    </header>
+
+    <!-- 遊戲主要畫布 (480 x 640) -->
+    <div class="canvas-wrapper">
+      <canvas id="gameCanvas" width="480" height="640"></canvas>
+    </div>
+
+    <!-- 行動裝置虛擬控制器 (手機專屬，位於畫布下方不遮擋視線) -->
+    <div id="mobileController" class="mobile-controller">
+      <div class="dpad-container">
+        <button class="dpad-btn up" data-key="ArrowUp" aria-label="上">▲</button>
+        <div class="dpad-row">
+          <button class="dpad-btn left" data-key="ArrowLeft" aria-label="左">◀</button>
+          <button class="dpad-btn down" data-key="ArrowDown" aria-label="下">▼</button>
+          <button class="dpad-btn right" data-key="ArrowRight" aria-label="右">▶</button>
+        </div>
+      </div>
+      <div class="action-container">
+        <button id="btnAutoFire" class="btn-autofire">連發: 關</button>
+        <button class="action-btn fire-btn" data-key="Space" aria-label="開火">FIRE</button>
+      </div>
+    </div>
+
+    <!-- 底部操作與關卡說明卡片 -->
+    <footer class="arcade-footer">
+      <div class="control-card">
+        <h3>🎮 關卡與手機操控</h3>
+        <p><strong>滑動拖曳：</strong>手機直接滑動螢幕即可靈活避開彈幕</p>
+        <p><strong>關卡規則：</strong>小怪 1 分，累積 <strong>90 分</strong> 觸發 50HP Boss 戰</p>
+        <p><strong>點擊螢幕：</strong>隨時點擊畫面可開始、重玩或通關重開</p>
+      </div>
+
+      <div class="control-card">
+        <h3>⌨️ / 🕹️ 電腦與實體搖桿</h3>
+        <p><strong>鍵盤：</strong>方向鍵 / <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>，<kbd>SPACE</kbd> 開火</p>
+        <p><strong>Arduino：</strong>點擊右上「連線 Arduino」支援雙軸搖桿實體操控</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

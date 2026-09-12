@@ -1,0 +1,322 @@
+:root {
+  --bg-main: #0a0b16;
+  --bg-card: #13152c;
+  --primary-cyan: #00dcff;
+  --primary-glow: rgba(0, 220, 255, 0.4);
+  --accent-red: #ff5050;
+  --accent-yellow: #ffff00;
+  --text-main: #e0e6ed;
+  --text-muted: #8892b0;
+  --canvas-border: #1f274a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'Courier New', Courier, monospace, system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12px 10px;
+}
+
+.arcade-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  gap: 10px;
+}
+
+/* ── 頂部導航與狀態列 ── */
+.arcade-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--canvas-border);
+  border-radius: 8px;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-lobby {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #c5d1eb;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-family: inherit;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-lobby:hover {
+  background: rgba(0, 220, 255, 0.2);
+  color: #fff;
+  border-color: var(--primary-cyan);
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.arcade-title {
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+  color: var(--primary-cyan);
+  text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.badge {
+  font-size: 0.62rem;
+  padding: 2px 5px;
+  background: rgba(0, 220, 255, 0.15);
+  border: 1px solid var(--primary-cyan);
+  border-radius: 4px;
+  color: var(--primary-cyan);
+}
+
+.controller-bar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.btn-serial, .btn-sound {
+  background: #1c2042;
+  border: 1px solid #323d6d;
+  color: #c5d1eb;
+  padding: 5px 8px;
+  font-size: 0.75rem;
+  font-family: inherit;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-serial:hover, .btn-sound:hover {
+  border-color: var(--primary-cyan);
+  color: #fff;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot.disconnected { background-color: #777; }
+.status-dot.connected {
+  background-color: #00ff88;
+  box-shadow: 0 0 6px #00ff88;
+  animation: pulse 1.8s infinite;
+}
+.status-dot.connecting {
+  background-color: #ffd700;
+  box-shadow: 0 0 6px #ffd700;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* ── 遊戲 Canvas 容器 ── */
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  background: #000;
+  border: 2px solid var(--canvas-border);
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.8), 0 0 12px rgba(0, 220, 255, 0.18);
+  overflow: hidden;
+  touch-action: none; /* 防止手機瀏覽器雙擊放大或滾動 */
+  aspect-ratio: 480 / 640;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  image-rendering: pixelated;
+}
+
+/* ── 行動裝置虛擬搖桿與控制器 (位於下方獨立排版) ── */
+.mobile-controller {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--canvas-border);
+  border-radius: 12px;
+  touch-action: none;
+}
+
+.dpad-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.dpad-row {
+  display: flex;
+  gap: 6px;
+}
+
+.dpad-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: #1c2242;
+  border: 1.5px solid #333d70;
+  color: #c0cdf0;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.dpad-btn:active, .dpad-btn.active {
+  background: rgba(0, 220, 255, 0.4);
+  border-color: var(--primary-cyan);
+  color: #fff;
+  transform: scale(0.95);
+}
+
+.action-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.fire-btn {
+  width: 72px;
+  height: 52px;
+  border-radius: 10px;
+  background: rgba(255, 80, 80, 0.25);
+  border: 2px solid var(--accent-red);
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: none;
+  transition: all 0.1s;
+}
+
+.fire-btn:active, .fire-btn.active {
+  background: rgba(255, 80, 80, 0.7);
+  box-shadow: 0 0 14px rgba(255, 80, 80, 0.8);
+  transform: scale(0.95);
+}
+
+.btn-autofire {
+  background: #1b213d;
+  border: 1px solid #3a477d;
+  color: #94a3b8;
+  font-size: 0.7rem;
+  font-family: inherit;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-autofire.on {
+  background: rgba(0, 220, 255, 0.2);
+  border-color: var(--primary-cyan);
+  color: var(--primary-cyan);
+  font-weight: bold;
+}
+
+/* ── 底部操作說明 ── */
+.arcade-footer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+@media (max-width: 500px) {
+  .arcade-footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.control-card {
+  background: var(--bg-card);
+  border: 1px solid var(--canvas-border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.73rem;
+  line-height: 1.4;
+}
+
+.control-card h3 {
+  color: var(--primary-cyan);
+  font-size: 0.82rem;
+  margin-bottom: 4px;
+  border-bottom: 1px dashed rgba(0, 220, 255, 0.2);
+  padding-bottom: 3px;
+}
+
+.control-card p {
+  margin: 2px 0;
+  color: var(--text-muted);
+}
+
+.control-card strong {
+  color: var(--text-main);
+}
+
+kbd {
+  background: #232a4e;
+  border: 1px solid #3c4a85;
+  border-radius: 4px;
+  padding: 1px 4px;
+  font-family: inherit;
+  color: #fff;
+  font-size: 0.7rem;
+}

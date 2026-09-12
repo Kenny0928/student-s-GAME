@@ -1,0 +1,287 @@
+:root {
+  --bg-main: #070814;
+  --bg-card: #111328;
+  --bg-card-hover: #191c3d;
+  --primary-cyan: #00dcff;
+  --primary-glow: rgba(0, 220, 255, 0.4);
+  --boss-magenta: #ff0077;
+  --boss-glow: rgba(255, 0, 119, 0.45);
+  --accent-gold: #ffd700;
+  --text-main: #edf2f7;
+  --text-muted: #94a3b8;
+  --border-color: #23274e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-main);
+  background-image: 
+    radial-gradient(ellipse at 50% 10%, rgba(0, 220, 255, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 90%, rgba(255, 0, 119, 0.1) 0%, transparent 50%);
+  color: var(--text-main);
+  font-family: 'Courier New', Courier, monospace, system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 16px;
+}
+
+.portal-container {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── 大廳頂部標題 ── */
+.portal-header {
+  text-align: center;
+}
+
+.portal-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  padding: 4px 12px;
+  background: rgba(0, 220, 255, 0.1);
+  border: 1px solid var(--primary-cyan);
+  border-radius: 20px;
+  color: var(--primary-cyan);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.portal-title {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  letter-spacing: 3px;
+  color: #ffffff;
+  text-shadow: 0 0 16px var(--primary-glow);
+  margin-bottom: 8px;
+}
+
+.portal-subtitle {
+  color: var(--text-muted);
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  line-height: 1.5;
+}
+
+/* ── 支援特色標籤列 ── */
+.feature-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.pill {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #cbd5e1;
+}
+
+/* ── 遊戲卡片區域 ── */
+.games-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.game-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--border-color);
+  transition: background 0.28s;
+}
+
+.game-card.original::before {
+  background: linear-gradient(90deg, #00dcff, #00ffaa);
+}
+
+.game-card.boss::before {
+  background: linear-gradient(90deg, #ff0077, #ffbb00);
+}
+
+.game-card:hover, .game-card:focus {
+  transform: translateY(-5px);
+  background: var(--bg-card-hover);
+}
+
+.game-card.original:hover {
+  border-color: var(--primary-cyan);
+  box-shadow: 0 12px 30px rgba(0, 220, 255, 0.25);
+}
+
+.game-card.boss:hover {
+  border-color: var(--boss-magenta);
+  box-shadow: 0 12px 30px var(--boss-glow);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.card-icon {
+  font-size: 2.4rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.tag.cyan {
+  background: rgba(0, 220, 255, 0.15);
+  color: var(--primary-cyan);
+  border: 1px solid var(--primary-cyan);
+}
+
+.tag.magenta {
+  background: rgba(255, 0, 119, 0.18);
+  color: var(--boss-magenta);
+  border: 1px solid var(--boss-magenta);
+}
+
+.card-title {
+  font-size: 1.35rem;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.card-features {
+  list-style: none;
+  font-size: 0.8rem;
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-features li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #cbd5e1;
+}
+
+.card-features li span {
+  color: var(--primary-cyan);
+}
+
+.game-card.boss .card-features li span {
+  color: var(--boss-magenta);
+}
+
+.btn-play {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-align: center;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.game-card.original .btn-play {
+  background: rgba(0, 220, 255, 0.15);
+  color: var(--primary-cyan);
+  border: 1px solid var(--primary-cyan);
+}
+
+.game-card.original:hover .btn-play {
+  background: var(--primary-cyan);
+  color: #000;
+  box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.game-card.boss .btn-play {
+  background: rgba(255, 0, 119, 0.15);
+  color: var(--boss-magenta);
+  border: 1px solid var(--boss-magenta);
+}
+
+.game-card.boss:hover .btn-play {
+  background: var(--boss-magenta);
+  color: #fff;
+  box-shadow: 0 0 15px var(--boss-glow);
+}
+
+/* ── 底部指引 ── */
+.portal-footer {
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--border-color);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.portal-footer strong {
+  color: #e2e8f0;
+}
+
+@media (max-width: 600px) {
+  .portal-container {
+    gap: 18px;
+  }
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+  .game-card {
+    padding: 18px;
+  }
+}
+
